@@ -58,6 +58,6 @@ if __name__ == "__main__":
         success, img = cap.read()
         result, objectInfo, objectDetected = getObjects(img,0.45,0.2, objects=['cup'])
         #print(objectInfo)
-        cv2.imshow("Output",img)
+        #cv2.imshow("Output",img)
         cv2.waitKey(1)
     
