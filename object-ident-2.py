@@ -1,11 +1,13 @@
+import time
+
 import cv2
 import RPi.GPIO as GPIO
-import time
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(18,GPIO.OUT)
 #thres = 0.45 # Threshold to detect object
+
 
 classNames = []
 classFile = "/home/pi/Desktop/Object_Detection_Files/coco.names"
@@ -21,10 +23,11 @@ net.setInputScale(1.0/ 127.5)
 net.setInputMean((127.5, 127.5, 127.5))
 net.setInputSwapRB(True)
 
+objectDetected = False
 
 
 def getObjects(img, thres, nms, draw=True, objects=[]):
-    objectDetected = False
+    
     classIds, confs, bbox = net.detect(img,confThreshold=thres,nmsThreshold=nms)
     #print(classIds,bbox)
     if len(objects) == 0: objects = classNames
@@ -73,7 +76,7 @@ if __name__ == "__main__":
     while True:
         success, img = cap.read()
         result, objectInfo, objectDetected = getObjects(img,0.45,0.2, objects=['cup'])
-        print(objectInfo)
+        #print(objectInfo)
 
         if (objectDetected):
             print ("LED on")
@@ -84,5 +87,7 @@ if __name__ == "__main__":
             print ("LED off")
             GPIO.output(18,GPIO.LOW)
         #cv2.imshow("Output",img)
+        
         cv2.waitKey(1)
   #32 , detect 4sec, undo 7
+
