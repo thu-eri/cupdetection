@@ -35,21 +35,22 @@ def getObjects(img, thres, nms, draw=True, objects=[]):
             className = classNames[classId - 1]
             if className in objects:
                 objectInfo.append([box,className])
+            """
                 objectDetected = True
-            else: 
+                else: 
                 objectDetected = False
                 """
-                if (draw):
-                    #objectDetected = True
-                    cv2.rectangle(img,box,color=(0,255,0),thickness=2)
-                    cv2.putText(img,classNames[classId-1].upper(),(box[0]+10,box[1]+30),
-                    cv2.FONT_HERSHEY_COMPLEX,1,(0,255,0),2)
-                    cv2.putText(img,str(round(confidence*100,2)),(box[0]+200,box[1]+30),
-                    cv2.FONT_HERSHEY_COMPLEX,1,(0,255,0),2)
+            if (draw):
+                #objectDetected = True
+                cv2.rectangle(img,box,color=(0,255,0),thickness=2)
+                cv2.putText(img,classNames[classId-1].upper(),(box[0]+10,box[1]+30),
+                cv2.FONT_HERSHEY_COMPLEX,1,(0,255,0),2)
+                cv2.putText(img,str(round(confidence*100,2)),(box[0]+200,box[1]+30),
+                cv2.FONT_HERSHEY_COMPLEX,1,(0,255,0),2)
                    
                     
                     #print(f"{box[0]}, {box[1]}, {box[2]}, {box[3]}, {objectDetected}") #x,y, width, height = 0,1,2,3
-                    
+                """    
                     if box[0] > 265:
                         print ("LED on")
                         GPIO.output(18,GPIO.HIGH)
@@ -58,7 +59,7 @@ def getObjects(img, thres, nms, draw=True, objects=[]):
                         GPIO.output(18,GPIO.LOW)
                         print("right side")
                       
-                """    
+                """
                     
     return img,objectInfo, objectDetected
 
@@ -74,8 +75,9 @@ if __name__ == "__main__":
     while True:
         success, img = cap.read()
         result, objectInfo, objectDetected = getObjects(img,0.45,0.2, objects=['cup'])
-        print(objectInfo)
-
+        #print(objectInfo)
+        print(objectDetected)
+        """
         if (objectDetected):
             print ("LED on")
             GPIO.output(18,GPIO.HIGH)
@@ -84,7 +86,8 @@ if __name__ == "__main__":
         else:
             print ("LED off")
             GPIO.output(18,GPIO.LOW)
-        #cv2.imshow("Output",img)
+            """
+        cv2.imshow("Output",img)
         cv2.waitKey(1)
   #32 , detect 4sec, undo 7
 
