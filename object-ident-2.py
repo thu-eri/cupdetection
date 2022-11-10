@@ -73,7 +73,7 @@ if __name__ == "__main__":
     while True:
         success, img = cap.read()
         result, objectInfo, objectDetected = getObjects(img,0.45,0.2, objects=['cup'])
-        print(objectInfo)
+        #print(objectInfo)
 
         if (objectDetected):
             print ("LED on")
@@ -83,6 +83,6 @@ if __name__ == "__main__":
         else:
             print ("LED off")
             GPIO.output(18,GPIO.LOW)
-        #cv2.imshow("Output",img)
+           # cv2.imshow("Output",img)
         cv2.waitKey(1)
   #32 , detect 4sec, undo 7
