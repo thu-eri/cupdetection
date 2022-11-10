@@ -35,7 +35,8 @@ def getObjects(img, thres, nms, draw=True, objects=[]):
             if className in objects:
                 objectInfo.append([box,className])
                 objectDetected = True
-            
+            else: 
+                objectDetected = False
                 """
                 if (draw):
                     #objectDetected = True
@@ -51,7 +52,7 @@ def getObjects(img, thres, nms, draw=True, objects=[]):
                     if box[0] > 265:
                         print ("LED on")
                         GPIO.output(18,GPIO.HIGH)
-                        time.sleep(1)
+                        tim e.sleep(1)
                         print ("LED off")
                         GPIO.output(18,GPIO.LOW)
                         print("right side")
@@ -82,6 +83,6 @@ if __name__ == "__main__":
         else:
             print ("LED off")
             GPIO.output(18,GPIO.LOW)
-        cv2.imshow("Output",img)
+        #cv2.imshow("Output",img)
         cv2.waitKey(1)
   #32 , detect 4sec, undo 7
